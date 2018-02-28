@@ -1,0 +1,267 @@
+//colors
+$lte: #FFF;
+$med_lte: #CCC;
+$med_drk: #666;
+$drk: #111;
+$pmry: #3634AB;
+//shadows
+$elev_0: 0 1px 6px rgba(0,0,0,.4);
+$elev_1: 0 2px 8px rgba(0,0,0,.6);
+$elev_2: 0 18px 8px -10px rgba(0,0,0,.7);
+//rounded corners
+$rad: 6px;
+
+//general styling
+html, body {
+	height: 100%;
+	margin: 0;
+	width: 100%;
+	z-index: 1;
+}
+body {
+	background: $drk;
+	box-sizing: border-box;
+	cursor: default;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+* {
+	box-sizing: inherit;
+}
+button {
+	background: none;
+	border: none;
+	margin: 0;
+	outline: none;
+	padding: 0;
+	* {
+		pointer-events: none;
+	}
+}
+.anim {
+	transition: all .6s ease;
+}
+
+//header and logo
+#header {
+	background: $pmry;
+	box-shadow: $elev_2;
+	height: 60px;
+	position: fixed;
+	width: 100%;
+	z-index: 2;
+	.header_btns {
+		cursor: pointer;
+		height: 60px;
+		min-width: 60px;
+		position: absolute;
+		top: 0;
+		width: auto;
+	}
+	#logo_btn {
+		left: 0;
+		z-index: 2;
+		@media(min-width: 1024px) {
+			right: 10px;
+		}
+		#logo_icon {
+			height: 48px;
+			padding: 6px 16px;
+		}
+	}
+	.search_btn {
+		border-radius: 30px;
+		right: 0;
+		@media(min-width: 1024px) {
+			right: 10px;
+		}
+		.search_icon {
+			height: 24px;
+			margin: 18px;
+		}
+	}
+}
+
+#search {//search container for positioning
+	height: 100%;
+	position: relative;
+	width: 100%;
+	#search_box {//main search element
+		height: 100%;
+		opacity: 0;
+		height: 60px;
+		pointer-events: none;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 100%;
+		z-index: 3;
+		@media(min-width: 768px) {
+			width: 50%;
+		}
+		@media(min-width: 1024px) {
+			width: 25%;
+		}
+		#search_box_input {//the text box itself
+			background: $lte;
+			border: 0;
+			border-radius: 30px;
+			box-shadow: $elev_0;
+			display: block;
+			font-size: 20px;
+			height: 60px;
+			line-height: 24px;
+			outline: 0;
+			padding: 18px 70px 18px 18px;
+			position: absolute;
+			transform: scaleX(0.1) translateX(900%);
+			transition-delay: 0;
+			width: 100%;
+			will-change: transform;
+		}
+		.search_btn {//black color icon
+			opacity: 0;
+			transition-delay: .4s;
+		}
+		#cache {//recent searches dropdown
+			background: $med_lte;
+			border-radius: 0px 0px 6px 6px;
+			display: block;
+			max-height: 132px;
+			opacity: 0;
+			overflow-x: hidden;
+			overflow-y: auto;
+			position: absolute;
+			right: 0;
+			top: 60px;
+			transform: scaleY(0.1) translateY(-500px);
+			transition-delay: .8s;
+			width: 100%;
+			z-index: -1;
+			will-change: transform;
+			@media(min-width: 768px) {
+				border-radius: 0 0 0 6px;
+			}
+			ul {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+				li {
+					background: $lte;
+					opacity: 0.8;
+					&:nth-child(odd) {
+						opacity: 0.6;
+					}
+					&:hover {
+						opacity: 1;
+					}
+					button {
+						text-align: left;
+						cursor: pointer;
+						height: 44px;
+						padding: 10px;
+						width: 100%;
+						img {
+							float: left;
+							height: 24px;
+							margin-right: 10px;
+							opacity: .5;
+						}
+						span {
+							color: $med_drk;
+							float: left;
+							font-size: 20px;
+							height: 24px;
+							line-height: 24px;
+						}
+					}
+				}
+			}
+		}
+		//toggle all search elements visibilty here
+		&.visible {
+			opacity: 1;
+			pointer-events: all;
+			#search_box_input {
+				border-radius: 0;
+				transform: scaleX(1) translateX(0);
+				transition-delay: 0s!important;
+			}
+			.search_btn {
+				opacity: 1;
+				transition-delay: .4s!important;
+			}
+			#cache {
+				opacity: 1;
+				transform: scaleY(1) translateY(0);
+				transition-delay: .8s!important;
+			}
+		}
+		//exit animations
+		&.hidden {//this class is removed after the animations finish
+			opacity: 1;
+			pointer-events: none;
+			#search_box_input {
+				border-radius: 30px;
+				transform: scaleX(0.1) translateX(900%);
+				transition-delay: .3s!important;
+			}
+			.search_btn {
+				opacity: 0;
+				transition-delay: .3s!important;
+			}
+			#cache {
+				opacity: 0;
+				transform: scaleY(0.1) translateY(-500px);
+				transition-delay: 0s!important;
+			}
+		}
+	}
+}
+
+//app body / gallery
+#main {
+	padding: 70px 10px 10px 10px;
+	text-align: center;
+	h1 {//view title
+		color: $lte;
+		margin: 22px auto 10px auto;
+		padding: 0 10px;
+		width: 100%;
+		@media(min-width: 430px) {//keep it aligned with masonry-layout
+			text-align: left;
+			width: 430px;
+		}
+		@media(min-width: 640px) {
+			width: 640px;
+		}
+		@media(min-width: 850px) {
+			width: 850px;
+		}
+		@media(min-width: 1060px) {
+			width: 1060px;
+		}
+		@media(min-width: 1270px) {
+			width: 1270px;
+		}
+	}
+	#masonry-layout {//the gallery itself
+		display: block;
+		list-style: none;
+		margin: 0 auto;
+		padding: 0;
+		img {
+			border-radius: $rad;
+			box-shadow: $elev_1;
+			cursor: pointer;
+			display: block;
+			margin: 0;
+			padding: 0;
+			z-index: 1;
+		}
+	}
+}
