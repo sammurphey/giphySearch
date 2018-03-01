@@ -3,7 +3,7 @@ Giphy Search
 
 Hello and welcome to Giphy Search!! A React app for searching the vast Giphy image library :)
 
-![preview image](https://raw.githubusercontent.com/sammurphey/giphySearch/public/preview.png)
+![preview image](https://raw.githubusercontent.com/sammurphey/giphySearch/master/public/preview.png)
 
 **Follow these steps to launch the app..**
 
