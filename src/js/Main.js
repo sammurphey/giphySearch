@@ -15,14 +15,10 @@ class Images extends Component {//gallery object
 		this.getImages(this.props.view, this.props.query);
 	}
 	componentWillReceiveProps(nextProps) {
-		clearTimeout(this.refreshTimer);
 		//empty the data array, this forces masonryLayout to reflow
 		this.setState({pics: []});
 		//then, get the new images
-		this.refreshTimer = setTimeout((that, next) => {
-			//dont update too frequently, that'll also make masonry weird
-			that.getImages(next.view, next.query);
-		}, 10, this, nextProps)
+		this.getImages(nextProps.view, nextProps.query);
 	}
 	componentWillUnmount() {
 		clearTimeout(this.refreshTimer);
